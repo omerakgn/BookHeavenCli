@@ -1,0 +1,24 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .form-label{
+    width: 270px;
+    padding: 10px;
+    height: 90px;
+  }
+
+  .example-label {
+    display: table-cell;
+    font-size: 14px;
+    margin-left: 8px;
+    min-width: 120px;
+  }
+  
+  .createbtn {
+    display: table-cell;
+    max-width: 600px;
+    align-self: center;
+  }

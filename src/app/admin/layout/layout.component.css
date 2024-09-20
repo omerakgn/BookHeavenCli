@@ -1,0 +1,14 @@
+.admin-container {
+    width: 99%;
+    height: 900px;
+    border: 1px solid #555;
+    background: hsl(182, 91%, 27%);
+  }
+  
+  .admin-left{
+
+    width: 250px;
+  }
+  .text-color{
+    color: black;
+  }

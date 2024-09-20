@@ -1,0 +1,36 @@
+
+<mat-form-field class="form-label" appearance="fill">
+    <mat-label>İsim</mat-label>
+    <input matInput #txtName>
+  </mat-form-field>
+
+<mat-form-field class="form-label" appearance="fill">
+  <mat-label>Açıklama</mat-label>
+  <input matInput #txtDescription >
+</mat-form-field>
+
+<mat-form-field class="form-label" appearance="fill">
+  <mat-label>Fiyat</mat-label>
+  <input matInput #txtPrice type="number" min="0" value="0">
+</mat-form-field>
+
+<mat-form-field class="form-label" appearance="fill">
+  <mat-label>Stok Kodu</mat-label>
+  <input matInput #txtStockCode >
+</mat-form-field>
+
+<mat-form-field class="form-label" appearance="fill">
+  <mat-label>Yazar</mat-label>
+  <input matInput #txtManifacturer >
+</mat-form-field>
+
+<mat-form-field class="form-label" appearance="fill">
+  <mat-label>Image</mat-label>
+  <input matInput #txtImage >
+</mat-form-field>
+
+
+<div class="createbtn">
+  <button mat-flat-button (click)="create(txtName,txtDescription,txtPrice,txtStockCode,txtManifacturer,txtImage)" >Yeni Ürün Oluştur</button>
+
+</div>
