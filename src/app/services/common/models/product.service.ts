@@ -3,8 +3,8 @@ import { HttpClientService } from '../http-client.service';
 import { Create_Product } from '../../../contracts/create_product';
 import { HttpErrorResponse } from '@angular/common/http';
 import { error } from 'console';
-import { List_Product } from '../../../contracts/list_product';
-import { onErrorResumeNext } from 'rxjs';
+import { List_Product, listProductResponse } from '../../../contracts/list_product';
+import { Observable, onErrorResumeNext } from 'rxjs';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable({
@@ -35,10 +35,7 @@ export class ProductService {
         }
       });
   }
-  
-
-
- 
+   
 async read(successCallBack: () => void, errorCallBack: (errorMessage: string) => void): Promise<List_Product[]> {
   try {
     const data: List_Product[] = await firstValueFrom(this.httpClientService.get<List_Product[]>({
@@ -54,7 +51,23 @@ async read(successCallBack: () => void, errorCallBack: (errorMessage: string) =>
     throw errorResponse;  
   }
 }
+  get(successCallBack: () => void, errorCallBack: (errorMessage: string) => void) : Observable<listProductResponse>
+  {
+    try{
+      return this.httpClientService.get<listProductResponse>({
+        controller: "Book"
+      });
   
+      successCallBack();
+    }catch(errorResponse){
+      if (errorResponse instanceof HttpErrorResponse) {
+        errorCallBack(errorResponse.message);  
+      }
+      throw errorResponse;  
+
+    }
+    
+  }
 
 
 }

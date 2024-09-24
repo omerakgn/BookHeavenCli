@@ -1,19 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 declare var alertify: any;
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertifyService {
 
-  constructor() { } 
+  constructor() {
+ 
+  }
 
   message(message: string, options: Partial<AlertifyOptions>)
   {
-    if(!alertify){
-      console.error('Alertify not defined.');
-      return;
-    }
+    
     alertify.set('notifier','delay',options.delay =3 );  
     alertify.set('notifier','position', options.position = Position.BottomRight);
     const msj = alertify[options.messageType || MessageType.Message] (message);

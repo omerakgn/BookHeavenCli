@@ -2,13 +2,18 @@
     width: 99%;
     height: 900px;
     border: 1px solid #555;
-    background: hsl(182, 91%, 27%);
+   
   }
   
   .admin-left{
 
-    width: 250px;
+    width: 200px;
   }
   .text-color{
     color: black;
+  }
+
+  .drawerstyle{
+
+    width: 15%;;
   }

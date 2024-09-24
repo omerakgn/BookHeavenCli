@@ -4,9 +4,11 @@ export class List_Product {
     Price : number;
     StockCode: string;
     Manufacturer: string;
-    Description:string;
-    prdImage:string;
-    id: number;
+    
 }
 
+export class listProductResponse{
 
+    data: List_Product[];
+
+}
