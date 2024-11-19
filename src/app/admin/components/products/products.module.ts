@@ -12,6 +12,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { AppComponent } from '../../../app.component';
+import { DeleteDirectiveModule } from '../../../directives/admin/delete.directive.module';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogModule } from '../../../dialogs/dialog.module';
+import { FileUploadModule } from '../../../services/common/file-upload/file-upload.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,10 @@ import { AppComponent } from '../../../app.component';
     MatTableModule,
     MatPaginator,
     MatPaginatorModule,
+    DeleteDirectiveModule,
+    MatDialogModule,
+    DialogModule,
+    FileUploadModule,
     
   ],
   bootstrap: [AppComponent]

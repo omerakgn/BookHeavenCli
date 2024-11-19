@@ -22,3 +22,13 @@
     max-width: 600px;
     align-self: center;
   }
+
+  .headerlbl{
+   
+    height: 70px;
+    padding-top: 10px;
+    padding-left: 15px;
+    font-weight:normal;
+    font-size: x-large;
+    color: black;
+  }

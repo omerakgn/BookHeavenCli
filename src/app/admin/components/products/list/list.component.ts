@@ -7,6 +7,8 @@ import { ProductService } from '../../../../services/common/models/product.servi
 import { AlertifyService, MessageType, Position } from '../../../../services/admin/alertify.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { CustomToastrService } from '../../../../services/ui/custom-toastr.service';
+import { DialogService } from '../../../../services/dialog.service';
+import { SelectProductImageDialogComponent } from '../../../../dialogs/select-product-image-dialog/select-product-image-dialog.component';
 
 
 @Component({
@@ -16,32 +18,51 @@ import { CustomToastrService } from '../../../../services/ui/custom-toastr.servi
 })
 export class ListComponent extends BaseComponent implements OnInit{
 
-  constructor(spinner: NgxSpinnerService,private productService: ProductService, private toastrService: CustomToastrService){
+  constructor(
+    spinner: NgxSpinnerService,
+    private productService: ProductService,
+    private alertify: AlertifyService,
+    private dialogService: DialogService
+  ){
     super(spinner);
+  }
     
-}
+  // @ViewChild(MatPaginator) paginator: MatPaginator;
   
   Listdata!: List_Product[];
   dataSource= new MatTableDataSource<List_Product>();
  
 
    getProduct(){
-    this.showSpinner(SpinnerType.BallSpinClockWise);
-
-    this.productService.get(() => this.hideSpinner(SpinnerType.BallSpinClockWise), errorMessage => this.toastrService.message).subscribe(data => {
-      this.Listdata = data.data
+    
+    this.productService.get(() => this.hideSpinner(SpinnerType.BallSpinClockWise), () => 
+      this.alertify.message("Veriler Yüklenemedi",{
+        dismissOthers: true,
+        messageType: MessageType.Error,
+        position: Position.TopCenter
+      } )).subscribe(data => {
+      
+      this.Listdata = data.data     
       this.dataSource.data=this.Listdata;
-      console.log('list of datas', this.Listdata)
-    }
-    
-    )
-    
+    } )
   }
 
-  displayedColumns: string[] = ['Name', 'Price', 'StockCode', 'Manufacturer'];
+  addProductImages(id: string){
+   this.dialogService.openDialog({
+    componentType: SelectProductImageDialogComponent,
+    data: id,
+    options: {
+      Width: "1400px"
+    }
+   })
+  
+  }
+
+  displayedColumns: string[] = ['Name', 'Price', 'StockCode', 'Manufacturer','photos','Edit','Delete'];
   
   async ngOnInit() {
-    
+  
+   
    this.getProduct();
    
     

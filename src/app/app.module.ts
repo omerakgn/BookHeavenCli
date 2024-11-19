@@ -11,12 +11,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { DeleteDirective } from './directives/admin/delete.directive';
+import { FileUploadComponent } from './services/common/file-upload/file-upload.component';
+import { HomeModule } from './ui/components/home/home.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DeleteDirective,
-   
+
   ],
   imports: [
     BrowserModule,
@@ -27,6 +28,7 @@ import { DeleteDirective } from './directives/admin/delete.directive';
     UiModule,
     NgxSpinnerModule,
     HttpClientModule,
+    HomeModule
     
 ],
   providers: [

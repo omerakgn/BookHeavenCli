@@ -7,13 +7,15 @@ import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {path:"", component: HomeComponent}
-    ])
-  ]
+    ]),
+    
+  ],
+  bootstrap: [HomeComponent]
 })
 export class HomeModule { }

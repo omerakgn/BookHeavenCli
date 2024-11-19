@@ -1,3 +1,7 @@
+<div>
+  <label class="headerlbl" > Yeni Ürün Kayıt</label>
+</div>
+
 
 <mat-form-field class="form-label" appearance="fill">
     <mat-label class="example-label">İsim</mat-label>
@@ -34,3 +38,6 @@
   <button mat-flat-button (click)="create(txtName,txtDescription,txtPrice,txtStockCode,txtManifacturer,txtImage)" >Yeni Ürün Oluştur</button>
 
 </div>
+
+
+<app-file-upload [options]="fileUploadOptions"></app-file-upload>

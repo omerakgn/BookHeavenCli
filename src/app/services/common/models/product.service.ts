@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClientService } from '../http-client.service';
+import { HttpClientService, RequestParameter } from '../http-client.service';
 import { Create_Product } from '../../../contracts/create_product';
 import { HttpErrorResponse } from '@angular/common/http';
 import { error } from 'console';
 import { List_Product, listProductResponse } from '../../../contracts/list_product';
 import { Observable, onErrorResumeNext } from 'rxjs';
 import { firstValueFrom } from 'rxjs';
+import { ListProductImage } from '../../../contracts/list_product_image';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +22,7 @@ export class ProductService {
     }, product)
       .subscribe(result => {
         if (successCallBack) {
-          successCallBack();  // Eğer tanımlıysa çağır
+          successCallBack();  
         }
       }, (errorResponse: HttpErrorResponse) => {
         const _error: Array<{ key: string, value: Array<string> }> = errorResponse.error;
@@ -31,26 +33,10 @@ export class ProductService {
           });
         });
         if (errorCallBack) {
-          errorCallBack(message);  // Eğer tanımlıysa çağır
+          errorCallBack(message);  
         }
       });
-  }
-   
-async read(successCallBack: () => void, errorCallBack: (errorMessage: string) => void): Promise<List_Product[]> {
-  try {
-    const data: List_Product[] = await firstValueFrom(this.httpClientService.get<List_Product[]>({
-      controller: "Book"
-    }));
-
-    successCallBack(); 
-    return data;
-  } catch (errorResponse) {
-    if (errorResponse instanceof HttpErrorResponse) {
-      errorCallBack(errorResponse.message);  
-    }
-    throw errorResponse;  
-  }
-}
+  };
   get(successCallBack: () => void, errorCallBack: (errorMessage: string) => void) : Observable<listProductResponse>
   {
     try{
@@ -67,7 +53,33 @@ async read(successCallBack: () => void, errorCallBack: (errorMessage: string) =>
 
     }
     
+  };
+
+  async readImages(id: string, successCallBack: () => void): Promise<ListProductImage[]> {
+    
+    const getObservable: Observable<ListProductImage[]> = this.httpClientService.get<ListProductImage[]>({
+      action: "getproductimages",
+      controller: "Book"
+    },id) 
+    
+    const images: ListProductImage[]=  await firstValueFrom(getObservable);
+    successCallBack();
+    return images;
   }
 
+  async deleteImages(id: string ,imageId: any, successCallBack: () => void){
 
+    const deleteObservable = this.httpClientService.delete({
+      action: "deleteproductimage",
+      controller: "Book",
+      queryString: imageId,
+
+    }, id)
+    console.log("product id: " + id, typeof(id));
+    console.log("image id: " + imageId,typeof(imageId));
+    await firstValueFrom(deleteObservable);
+    successCallBack();
+  }
 }
+
+
