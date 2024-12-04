@@ -3,7 +3,7 @@ import { BaseDialog } from '../base/base-dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FileUploadOptions } from '../../services/common/file-upload/file-upload.component';
 import { ProductService } from '../../services/common/models/product.service';
-import { ListProductImage } from '../../contracts/list_product_image';
+import { ListProductImage, productImage } from '../../contracts/list_product_image';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../base/base.component';
 import { DialogService } from '../../services/dialog.service';
@@ -21,6 +21,7 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
   @Output() optionsChange = new EventEmitter<Partial<FileUploadOptions>>(); 
 
   public options: Partial<FileUploadOptions>;  
+  router: any;
   
   constructor(dialogRef: MatDialogRef<SelectProductImageDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SelectProductImageState | string ,
@@ -38,9 +39,9 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
       queryString: this.data.toString(),
     };
     this.optionsChange.emit(this.options);
-    
+   
   }
-  images: ListProductImage[];
+  images: productImage[];
   
   async ngOnInit() {
 
@@ -50,10 +51,9 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
   
 }
  
+
 async deleteImage(imageId: any, event: any){
-   
-  const fileData: FormData = new FormData();
-  
+  console.log("image ID select product  "+ imageId);
   this.dialogService.openDialog({
     componentType: DeleteDialogComponent,
     data: DeleteState.Yes,
@@ -61,17 +61,19 @@ async deleteImage(imageId: any, event: any){
       this.spinner.show(SpinnerType.CubeTransition)
       if(this.options.queryString)
 
-      fileData.set("imageId" ,this.options.queryString);
-      await this.productService.deleteImages(this.data as string, fileData, () => {
+     
+      await this.productService.deleteImages(this.data as string, imageId, () => {
         this.spinner.hide(SpinnerType.CubeTransition);
         var card = $(event.srcElement).parent().parent();
-        debugger;
+        
         card.fadeOut(500);
+      
       });
+     this.ngOnInit();
     }
   })
 }
-   
+
   
 
 }

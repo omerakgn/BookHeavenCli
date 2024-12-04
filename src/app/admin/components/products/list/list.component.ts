@@ -42,7 +42,7 @@ export class ListComponent extends BaseComponent implements OnInit{
         position: Position.TopCenter
       } )).subscribe(data => {
       
-      this.Listdata = data.data     
+      this.Listdata = data.books;     
       this.dataSource.data=this.Listdata;
     } )
   }

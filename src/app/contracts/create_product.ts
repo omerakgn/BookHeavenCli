@@ -5,7 +5,6 @@ export class Create_Product {
     Price : number;
     StockCode: string;
     Manufacturer: string;
-    PrdImage: string;
 }
 
 

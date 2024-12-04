@@ -1,0 +1,54 @@
+
+<div class="row"  >
+  <label class="text-center" style="margin-top:3%; font-size:20px;">Merhaba, </label>
+  <label class="text-center" >KitapCenneti'ne Hoş Geldiniz!</label>
+</div>
+<div class="register-container border" >
+<form style="padding-left: 30px;" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <div class="form-row">
+            <div class="form-group col-md-10"> 
+                <label for="name">Adınız </label>
+                <input type="email" formControlName="name" class="form-control" id="name"
+                 [ngClass]="{'is-invalid': submitted && component.name.errors}">
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.name.errors?.required">Lütfen adınızı giriniz.</small>
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && (component.name.errors?.minlength || component.name.errors?.maxlength) " >Lütfen 3 ile 25 karakter arasında giriniz.</small>
+              </div>
+              <div class="form-group col-md-10"> 
+                <label for="surname">Soyadınız </label>
+                <input type="email"formControlName="surname" class="form-control" id="surname" 
+                [ngClass]="{'is-invalid': submitted && component.surname.errors}" >
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.surname.errors?.required">Lütfen soyadınızı giriniz.</small>
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && (component.surname.errors?.minlength || component.surname.errors?.maxlength) " >Lütfen 3 ile 25 karakter arasında giriniz.</small>
+              </div>
+            <div class="form-group col-md-10"> 
+                <label for="email">E-posta adresiniz </label>
+                <input type="email" formControlName="email" class="form-control" id="email"
+                [ngClass]="{'is-invalid': submitted && component.email.errors}" >
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.email.errors?.required">Lütfen e-posta adresinizi giriniz.</small>
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.email.errors?.maxlength " >En fazla 250 karakter girebilirsiniz.</small>
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.email.errors?.email">Lütfen e-posta adresinizi doğru giriniz.</small>
+              </div>
+              <div class="form-group col-md-10">
+                <label for="password">Şifre </label>
+                <input type="password" formControlName="password" class="form-control" id="password" 
+                [ngClass]="{'is-invalid': submitted && component.password.errors}" >
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && component.password.errors?.required">Lütfen bir şifre belirleyiniz.</small>
+                <small class="form-text text-muted invalid-feedback" *ngIf="submitted && (component.password.errors?.maxlength || component.password.errors?.minlength )" >En az 7, en fazla 100 karakter girmelisiniz.</small>
+              </div>
+            </div>
+           
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="gridCheck" formControlName="checkbox"
+                [ngClass]="{'is-invalid': submitted && component.checkbox.errors}" >
+                <label class="form-check-label col-md-10" for="gridCheck">
+                  Kişisel Verilerin Korunması metnini okudum ve kabul ediyorum.
+                </label>
+              
+              </div>
+        </div>
+    
+   
+    <button type="submit" class="btn btn-success" [disabled]="!form.value.checkbox">KAYIT OL</button>
+  </form>
+</div>

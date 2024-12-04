@@ -28,16 +28,10 @@
   <input matInput #txtManifacturer >
 </mat-form-field>
 
-<mat-form-field class="form-label" appearance="fill">
-  <mat-label class="example-label">Image Link</mat-label>
-  <input matInput #txtImage >
-</mat-form-field>
-
 
 <div class="createbtn">
-  <button mat-flat-button (click)="create(txtName,txtDescription,txtPrice,txtStockCode,txtManifacturer,txtImage)" >Yeni Ürün Oluştur</button>
+  <button class="btn btn-success mx-auto" (click)="create(txtName,txtDescription,txtPrice,txtStockCode,txtManifacturer)" >Yeni Ürün Oluştur</button>
 
 </div>
 
 
-<app-file-upload [options]="fileUploadOptions"></app-file-upload>

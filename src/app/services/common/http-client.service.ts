@@ -57,24 +57,27 @@ export class HttpClientService {
     return this.httpClient.put<T>(url, body, { headers: requestParameter.headers });
 
   }
-  delete<T>(requestParameter:Partial<RequestParameter>, id: string ): Observable<T>{
-
+  delete<T>(requestParameter:Partial<RequestParameter>, id: string, imageId? : string ): Observable<T>{
+   
     let url: string= "";
     if(requestParameter.fullEndPoint){
       url = requestParameter.fullEndPoint;
     }
-    else{ 
+    if(imageId==null){
       url = `${this.url(requestParameter)}/ ${id}`;
-      console.log(id, typeof(id));
-      console.log(requestParameter.queryString, typeof(requestParameter.queryString));
     }
-    var data = requestParameter.queryString
-    console.log(data, typeof(data));
+    else{ 
+      url = `${this.url(requestParameter)}/ ${id} / ${imageId}`;
+    
+    
+    }
+  
     return this.httpClient.delete<T>(url, {headers: requestParameter.headers});
 
   }
 
 }
+
 
 
 export class RequestParameter{

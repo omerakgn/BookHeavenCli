@@ -9,6 +9,6 @@ export class List_Product {
 
 export class listProductResponse{
 
-    data: List_Product[];
+    books: List_Product[];
 
 }

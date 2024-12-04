@@ -28,17 +28,10 @@ export class CreateComponent extends BaseComponent implements OnInit{
   ngOnInit(): void {
     
   }
-  @Output() fileUploadOptions: Partial<FileUploadOptions> = {
-    action:   "upload",
-    controller: "Book",
-    explanation: "Resimleri sürükleyin veya seçin...",
-    isAdminPage: true,
-    accept: ".png, .jpg, .jpeg" 
-  }
+ 
 
 
-
-  create(Name:HTMLInputElement,Description:HTMLInputElement,Price:HTMLInputElement,StockCode:HTMLInputElement,Manufacturer:HTMLInputElement,Image:HTMLInputElement){
+  create(Name:HTMLInputElement,Description:HTMLInputElement,Price:HTMLInputElement,StockCode:HTMLInputElement,Manufacturer:HTMLInputElement){
     this.showSpinner(SpinnerType.BallSpinClockWise);
     const create_product: Create_Product = new Create_Product();
     create_product.Name= Name.value;
@@ -46,7 +39,6 @@ export class CreateComponent extends BaseComponent implements OnInit{
     create_product.Price = parseFloat(Price.value);
     create_product.StockCode = StockCode.value;
     create_product.Manufacturer = Manufacturer.value;
-    create_product.PrdImage = Image.value;
 
 
     if(!Name.value){
@@ -94,15 +86,7 @@ export class CreateComponent extends BaseComponent implements OnInit{
       });
       return;
     }
-    if(!Image.value){
-      this.alertify.message("Lütfen resim kısmını doldurunuz!", {
-        dismissOthers: true,
-        messageType: MessageType.Error,
-        position: Position.TopRight
-
-      });
-      return;
-    }
+  
     
     
     this.productService.create(create_product, ()=> {
@@ -112,9 +96,9 @@ export class CreateComponent extends BaseComponent implements OnInit{
           messageType:MessageType.Success,
           position: Position.TopRight,
         },);
-        // Burada '/list' hedef route'un olmalı
+
       this.router.navigateByUrl('', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/admin/products']); // Burada hedef componentin route'u yazı
+      this.router.navigate(['/admin/products']); 
       });
         
     }, errorMessage => {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
 import { HttpClientService } from '../http-client.service';
 import { AlertifyService, MessageType, Position } from '../../admin/alertify.service';
@@ -16,7 +16,7 @@ import { FileUploadDialogComponent, FileUploadDialogState } from '../../../dialo
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.css'
 })
-export class FileUploadComponent {
+export class FileUploadComponent{
 
   constructor(
     private httpClientService: HttpClientService,
@@ -25,6 +25,7 @@ export class FileUploadComponent {
     private dialog: MatDialog,
     private dialogService: DialogService,
     private spinner: NgxSpinnerService) { }
+
 
     public files: NgxFileDropEntry[];
 
@@ -64,6 +65,7 @@ export class FileUploadComponent {
                     messageType: MessageType.Success,
                     position: Position.TopRight
                   })
+                  
               } else {
                 this.customToastrService.message(message, "Başarılı.", {
                   messageType: ToastrMessageType.Success,
