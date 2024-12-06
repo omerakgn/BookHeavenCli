@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckboxControlValueAccessor, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../../entities/user';
+import { UserService } from '../../../services/common/models/user.service';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../services/ui/custom-toastr.service';
+import { Create_User } from '../../../contracts/users/create_user';
 
 @Component({
   selector: 'app-register',
@@ -8,7 +11,7 @@ import { User } from '../../../entities/user';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-constructor(private formBuilder: FormBuilder){}
+constructor(private formBuilder: FormBuilder , private userService: UserService, private toastrService: CustomToastrService){}
  
 
 form: FormGroup;
@@ -43,12 +46,25 @@ get component(){
 
 submitted: boolean = false;
 
-onSubmit(user: User){
+  async onSubmit(user: User){
 this.submitted = true;
 
 if(this.form.invalid){
   return;
 }
+
+
+const result: Create_User = await this.userService.create(user);
+if (result.success)
+  this.toastrService.message(result.message, "Kullanıcı Kaydı Başarılı", {
+    messageType: ToastrMessageType.Success,
+    position: ToastrPosition.TopRight
+  })
+else
+  this.toastrService.message(result.message, "Hata", {
+    messageType: ToastrMessageType.Error,
+    position: ToastrPosition.TopRight
+  })
 
 }
 }
