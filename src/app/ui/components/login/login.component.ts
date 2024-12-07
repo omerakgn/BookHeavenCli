@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../../services/common/models/user.service';
+import { BaseComponent, SpinnerType } from '../../../base/base.component';
+import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent implements OnInit {
-constructor(private formBuilder: FormBuilder){}
+export class LoginComponent extends BaseComponent implements OnInit {
+constructor(private formBuilder: FormBuilder,private  userService: UserService,spinner: NgxSpinnerService){
+  super(spinner);
+}
   
 form: FormGroup;
 
@@ -40,5 +45,9 @@ ngOnInit(): void {
     
     }
 
+    async login(Email: string, Password: string){
+      this.showSpinner(SpinnerType.BallSpinClockWise);
+      await this.userService.login(Email,Password, () => this.hideSpinner(SpinnerType.BallSpinClockWise));
+    }
 
 }
