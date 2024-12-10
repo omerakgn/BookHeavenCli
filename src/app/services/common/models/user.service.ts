@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClientService } from '../http-client.service';
-import { CustomToastrService, ToastrMessageType } from '../../ui/custom-toastr.service';
+import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui/custom-toastr.service';
 import { User } from '../../../entities/user';
 import { Create_User } from '../../../contracts/users/create_user';
 import { firstValueFrom, Observable } from 'rxjs';
@@ -31,10 +31,11 @@ export class UserService {
 
     const tokenResponse : TokenResponse = await firstValueFrom(observable) as TokenResponse;
     if(tokenResponse){
-      localStorage.setItem("accessToken", tokenResponse.token.accessToken); 
-      this.toastrService.message("Kullanıcı girişi başarıyla sağlanmıştır.","Giriş Başarılı",{
+      localStorage.setItem("accessToken", tokenResponse.tokendto.accessToken); 
+      console.log("tokendto set : "+ tokenResponse);
+      this.toastrService.message("Giriş başarıyla yapıldı", "Giriş Başarılı", {
         messageType: ToastrMessageType.Success,
-        
+        position: ToastrPosition.TopRight,
       })
     }
     callBackFunction();

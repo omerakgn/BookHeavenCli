@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
           <div class="input-group mx-auto" style="width: 500px;">
-            <input type="text" class="form-control me-2" role="search" aria-label="Search" placeholder="Ara" (keyup)="searching($event)">
+            <input type="text" class="form-control me-2" role="search" aria-label="Search" placeholder="Ara" >
             <div class="input-group-append">
               <a ><img src="../assets/find3.jpg" width="30" height="30" /></a>
               
@@ -19,7 +19,7 @@
 
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <button class="btn btn-outline-success" type="submit" routerLink="admin">Yönetim paneli</button>
+              <button class="btn btn-outline-success" type="submit" routerLink="admin" *ngIf="authService.isAuthenticated">Yönetim paneli</button>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="products">
@@ -31,7 +31,7 @@
                 <img src="../assets/basket.png" width="20" height="20" />
                 Sepet</a>
             </li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown" *ngIf="!authService.isAuthenticated">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="../assets/profile.png" width="25" height="20" />
                 Giriş Yap
@@ -40,6 +40,19 @@
                 
                 <li><a class="dropdown-item" routerLink="login">Giriş Yap</a></li>
                 <li><a class="dropdown-item" routerLink="register">Kayıt Ol</a></li>
+                
+              
+              </ul>
+            </li>
+            <li class="nav-item dropdown" *ngIf="authService.isAuthenticated">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="../assets/profile.png" width="25" height="20" />
+                Hesabım
+              </a>
+              <ul class="dropdown-menu" >
+                
+                <li><a class="dropdown-item" routerLink="">Profil</a></li>
+                <li><a class="dropdown-item" style="cursor:pointer" (click)= "signOut()" >Çıkış Yap</a></li>
                 
               
               </ul>

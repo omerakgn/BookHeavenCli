@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CustomToastrService, ToastrMessageType, ToastrOptions, ToastrPosition } from './services/ui/custom-toastr.service';
 declare var $: any
 import { Router, RouterModule, Routes } from '@angular/router';
+import { AuthService } from './services/common/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,18 @@ import { Router, RouterModule, Routes } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'BookHeavenCli';
-  constructor(private router: Router){
-    
+
+  constructor(public authService: AuthService,private router: Router, private toastrService: CustomToastrService){
+    authService.identityCheck();
    }
 
+   signOut(){
+    this.authService.removeToken();
+    this.router.navigate([""]);
+    this.toastrService.message("Çıkış başarıyla gerçekleştirildi.","Çıkış Yapıldı",{
+      messageType: ToastrMessageType.Info,
+      position: ToastrPosition.TopRight,
+    })
+   }
 
-  searching(event:any){
-    console.log("routing");
-    this.router.navigateByUrl('/search/' + event.target.value );
-  }
 }

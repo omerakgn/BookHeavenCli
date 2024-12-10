@@ -9,10 +9,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { DeleteDirective } from './directives/admin/delete.directive';
 import { FileUploadComponent } from './services/common/file-upload/file-upload.component';
 import { HomeModule } from './ui/components/home/home.module';
+import { JwtModule } from '@auth0/angular-jwt'
+import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,21 @@ import { HomeModule } from './ui/components/home/home.module';
     UiModule,
     NgxSpinnerModule,
     HttpClientModule,
-    HomeModule
+    HomeModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem("accessToken"),
+        allowedDomains: ["localhost:7250"],
+      }
+    })
     
 ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(),
-    {provide: "baseUrl", useValue:"https://localhost:7250/api", multi: true }
+    {provide: "baseUrl", useValue:"https://localhost:7250/api", multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorHandlerInterceptorService, multi: true}
   ],
   bootstrap: [AppComponent]
 })

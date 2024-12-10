@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/common/models/user.service';
 import { BaseComponent, SpinnerType } from '../../../base/base.component';
 import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from '../../../services/common/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +13,14 @@ import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
   styleUrl: './login.component.css'
 })
 export class LoginComponent extends BaseComponent implements OnInit {
-constructor(private formBuilder: FormBuilder,private  userService: UserService,spinner: NgxSpinnerService){
+constructor(
+  private formBuilder: FormBuilder,
+  private  userService: UserService,
+  spinner: NgxSpinnerService,
+  private authService: AuthService,
+  private activatedRoute:  ActivatedRoute,
+  private router: Router
+){
   super(spinner);
 }
   
@@ -47,7 +57,20 @@ ngOnInit(): void {
 
     async login(Email: string, Password: string){
       this.showSpinner(SpinnerType.BallSpinClockWise);
-      await this.userService.login(Email,Password, () => this.hideSpinner(SpinnerType.BallSpinClockWise));
+      await this.userService.login(Email,Password, () => {
+        this.authService.identityCheck();
+
+        this.activatedRoute.queryParams.subscribe(params => {
+          const returnUrl: string = params["returnUrl"];
+          if(returnUrl){
+            this.router.navigate([returnUrl]);
+          }else{
+            this.router.navigate([""]);
+          }
+        })
+        this.hideSpinner(SpinnerType.BallSpinClockWise);
+
+      });
     }
 
 }
