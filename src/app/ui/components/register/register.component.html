@@ -6,7 +6,7 @@
 <div class="register-container border" >
 <form style="padding-left: 30px;" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
     <div class="form-row">
-            <div class="form-group col-md-10"> 
+            <div class="form-group col-md-10" style="padding-top: 10px;"> 
                 <label for="name">Adınız </label>
                 <input type="email" formControlName="name" class="form-control" id="name"
                  [ngClass]="{'is-invalid': submitted && component.name.errors}">

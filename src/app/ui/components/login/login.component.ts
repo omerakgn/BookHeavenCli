@@ -6,6 +6,7 @@ import { NgxSpinnerComponent, NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from '../../../services/common/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { UserAuthService } from '../../../services/common/models/userauth.service';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
 constructor(
   private formBuilder: FormBuilder,
   private  userService: UserService,
+  private userAuthService: UserAuthService,
   spinner: NgxSpinnerService,
   private authService: AuthService,
   private activatedRoute:  ActivatedRoute,
@@ -57,7 +59,7 @@ ngOnInit(): void {
 
     async login(Email: string, Password: string){
       this.showSpinner(SpinnerType.BallSpinClockWise);
-      await this.userService.login(Email,Password, () => {
+      await this.userAuthService.login(Email,Password, () => {
         this.authService.identityCheck();
 
         this.activatedRoute.queryParams.subscribe(params => {

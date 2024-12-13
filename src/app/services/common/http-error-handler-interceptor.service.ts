@@ -1,15 +1,19 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpStatusCode } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { error } from 'console';
 import { catchError, Observable, of } from 'rxjs';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../ui/custom-toastr.service';
+import { UserAuthService } from './models/userauth.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
 
-  constructor(private toastrService: CustomToastrService) { }
+  constructor(private toastrService: CustomToastrService,private userAuthService: UserAuthService,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     
     return next.handle(req).pipe(catchError(error => {
@@ -19,6 +23,11 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
             messageType: ToastrMessageType.Warning,
             position: ToastrPosition.TopFullWidth
           });
+         
+            const refreshToken: string| any = localStorage.getItem("refreshToken");
+            this.userAuthService.refreshTokenLogin(refreshToken).then(data => {});
+          
+          
           break;
         case HttpStatusCode.InternalServerError:
           this.toastrService.message("Sunucuya erişilemiyor!","Sunucu Hatası!",{

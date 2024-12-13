@@ -23,21 +23,4 @@ export class UserService {
 
   }
 
-  async login(Email: string,Password: string, callBackFunction : ()=> void ): Promise<any>{
-    const observable : Observable<any | TokenResponse> = this.httpClientService.post<any | TokenResponse>({
-      controller:"users",
-      action: "login" 
-    }, {Email , Password})
-
-    const tokenResponse : TokenResponse = await firstValueFrom(observable) as TokenResponse;
-    if(tokenResponse){
-      localStorage.setItem("accessToken", tokenResponse.tokendto.accessToken); 
-      console.log("tokendto set : "+ tokenResponse);
-      this.toastrService.message("Giriş başarıyla yapıldı", "Giriş Başarılı", {
-        messageType: ToastrMessageType.Success,
-        position: ToastrPosition.TopRight,
-      })
-    }
-    callBackFunction();
-  }
 }
