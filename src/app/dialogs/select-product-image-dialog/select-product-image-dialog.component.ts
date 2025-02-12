@@ -74,7 +74,12 @@ async deleteImage(imageId: any, event: any){
   })
 }
 
-  
+  showCase(imageId:string){
+    this.spinner.show(SpinnerType.BallSpinClockWise);
+
+    this.productService.changeShowcaseImage(imageId, this.data as string, ()=> this.spinner.hide(SpinnerType.BallSpinClockWise)
+   );
+  }
 
 }
 

@@ -1,25 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
+import { BookComponent } from './book.component';
 import { RouterModule } from '@angular/router';
-import { ComponentsModule } from '../components.module';
+import { FooterComponent } from '../layout/footer/footer.component';
 import { LayoutUIModule } from '../layout/layoutUI.module';
 
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
-    
+    BookComponent
   ],
   imports: [
     CommonModule,
-    LayoutUIModule,
     RouterModule.forChild([
-      {path:"", component: HomeComponent}
-    ]),
-    
-  ],
-  bootstrap: [HomeComponent]
+          {path:"", component: BookComponent}
+        ]),
+        LayoutUIModule
+      ]
 })
-export class HomeModule { }
+export class BookModule { }

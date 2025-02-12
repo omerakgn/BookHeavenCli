@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../services/ui/custom-toastr.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from '../../base/base.component';
-import { _isAuthenticated } from '../../services/common/auth.service';
+import {  AuthService } from '../../services/common/auth.service';
+import { AlertifyOptions, AlertifyService, MessageType, Position } from '../../services/admin/alertify.service';
 
 
 @Injectable({
@@ -17,8 +18,9 @@ export class authGuard implements CanActivate {
     private jwtHelper: JwtHelperService,
      private router: Router,
      private toastrService: CustomToastrService,
-      private spinner: NgxSpinnerService
-
+    private spinner: NgxSpinnerService,
+    private alertify: AlertifyService,
+    private authService: AuthService
     ){
 
   }
@@ -26,17 +28,26 @@ export class authGuard implements CanActivate {
     
     this.spinner.show(SpinnerType.BallSpinClockWise);
    
-    
-    if(!_isAuthenticated){
-     this.router.navigate(["login"],{queryParams: {returnUrl: state.url}});
-    
-      this.toastrService.message("Oturum açmanız gerekiyor !", "Yetkisiz Erişim!", {
-        messageType: ToastrMessageType.Warning,
-        position: ToastrPosition.TopRight,
-      })
+    const testfunction = () => {
+      console.log("test function is run !");
+      return "asdasd" ;
+    };
 
+    if(!this.authService.isAuthenticated){
+    // this.router.navigate(["login"],{queryParams: {returnUrl: state.url}});
+      console.dir("Oturum açmanız gerekiyor !");
+      this.alertify.message("Oturum açmanız gerekiyor !",
+        {
+          dismissOthers: true, 
+          messageType: MessageType.Error, 
+          position: Position.TopCenter
+        });
+    
+  
+      }
+      
      
-    }
+    
 
     this.spinner.hide(SpinnerType.BallSpinClockWise);
     

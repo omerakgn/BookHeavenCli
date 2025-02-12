@@ -2,25 +2,30 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsModule } from './products/products.module';
 import { HomeModule } from './home/home.module';
-import { BasketsModule } from './baskets/baskets.module';
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
 import { RegisterModule } from './register/register.module';
 import { LoginModule } from './login/login.module';
+import { LayoutUIModule } from './layout/layoutUI.module';
+import { BookModule } from './book/book.module';
+
+
 
 
 
 @NgModule({
   declarations: [
-    
+  
   ],
   imports: [
     CommonModule,
     ProductsModule,
     HomeModule,
-    BasketsModule,
     RegisterModule,
-    LoginModule
+    LoginModule,
+    LayoutUIModule,
+    BookModule
+  ],
+  exports:[
+    LayoutUIModule
   ]
 })
 export class ComponentsModule { }

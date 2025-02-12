@@ -52,6 +52,7 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
             messageType: ToastrMessageType.Warning,
             position: ToastrPosition.TopFullWidth
           });
+          console.log("ASIL ERRORR",error);
           break;
 
       }

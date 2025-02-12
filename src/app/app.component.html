@@ -19,18 +19,14 @@
 
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <button class="btn btn-outline-success" type="submit" routerLink="admin" *ngIf="authService.isAuthenticated">Yönetim paneli</button>
+              <button class="btn btn-outline-success" type="submit" routerLink="admin" *ngIf="authService.isAdmin">Yönetim paneli</button>
             </li>
             <li class="nav-item">
               <a class="nav-link" routerLink="products">
                 <img src="../assets/book.png" width="20" height="20" />
                 Kitaplar</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="baskets">
-                <img src="../assets/basket.png" width="20" height="20" />
-                Sepet</a>
-            </li>
+            
             <li class="nav-item dropdown" *ngIf="!authService.isAuthenticated">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="../assets/profile.png" width="25" height="20" />

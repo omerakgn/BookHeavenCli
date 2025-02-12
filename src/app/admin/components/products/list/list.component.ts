@@ -1,6 +1,6 @@
 import { afterNextRender, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { List_Product } from  '../../../../contracts/list_product';
+import { Product } from  '../../../../contracts/list_product';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from '../../../../base/base.component';
 import { ProductService } from '../../../../services/common/models/product.service';
@@ -27,11 +27,9 @@ export class ListComponent extends BaseComponent implements OnInit{
     super(spinner);
   }
     
-  // @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  Listdata!: List_Product[];
-  dataSource= new MatTableDataSource<List_Product>();
- 
+  Listdata!: Product[];
+  dataSource= new MatTableDataSource<Product>();
+  totalProductCount: number;
 
    getProduct(){
     
@@ -41,10 +39,11 @@ export class ListComponent extends BaseComponent implements OnInit{
         messageType: MessageType.Error,
         position: Position.TopCenter
       } )).subscribe(data => {
-      
-      this.Listdata = data.books;     
-      this.dataSource.data=this.Listdata;
-    } )
+        this.Listdata = data.books;     
+        this.dataSource.data=this.Listdata;
+        this.totalProductCount = data.totalProductCount;
+
+      })  
   }
 
   addProductImages(id: string){
@@ -60,12 +59,10 @@ export class ListComponent extends BaseComponent implements OnInit{
 
   displayedColumns: string[] = ['Name', 'Price', 'StockCode', 'Manufacturer','photos','Edit','Delete'];
   
-  async ngOnInit() {
-  
-   
-   this.getProduct();
-   
-    
+   ngOnInit() {  
+
+   this.getProduct();      
+
   }
   
 }

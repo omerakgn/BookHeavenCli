@@ -46,7 +46,7 @@ export class FileUploadComponent{
         afterClosed: () =>{
           this.spinner.show(SpinnerType.BallSpinClockWise)
           if(this.options.queryString)
-            
+            console.log("ACTION : ",this.options.controller),
           fileData.set("id", this.options.queryString)
           this.httpClientService.post({
             controller: this.options.controller,
@@ -75,7 +75,8 @@ export class FileUploadComponent{
     
     
             }, (errorResponse: HttpErrorResponse) => {
-    
+              
+              console.log("ERRORRRR :" , errorResponse);
               const message: string = "Dosyalar yüklenirken beklenmeyen bir hatayla karşılaşılmıştır.";
     
               this.spinner.hide(SpinnerType.BallSpinClockWise)

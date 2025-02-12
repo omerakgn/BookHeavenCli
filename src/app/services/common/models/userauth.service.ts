@@ -31,6 +31,7 @@ export class UserAuthService {
     }
     callBackFunction();
   }
+  //access token expire olmadan refresh token çağırma
 
   async refreshTokenLogin(refreshToken: string): Promise<any>{
 

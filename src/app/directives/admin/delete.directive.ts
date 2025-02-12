@@ -39,10 +39,11 @@ export class DeleteDirective extends BaseComponent  {
   async onclick(){
     this.openDialog(async () => {
       this.showSpinner(SpinnerType.CubeTransition);
+      console.log("controller :", this.controller);
       const td: HTMLTableCellElement = this.element.nativeElement;
       this.httpClient.delete({
         controller: this.controller,
-  
+       
       },this.id).subscribe(data => {
         $(td.parentElement).animate({
           opacity: 0,
@@ -58,7 +59,7 @@ export class DeleteDirective extends BaseComponent  {
         } );
       });
     })
-   
+
   }
   readonly dialog = inject(MatDialog);
   openDialog(afterClosed: any) : void{

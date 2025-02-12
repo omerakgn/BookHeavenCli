@@ -1,14 +1,27 @@
-export class List_Product {
+import { ListProductImage, productImage } from "./list_product_image";
 
-    Name: string;
-    Price : number;
-    StockCode: string;
-    Manufacturer: string;
+export class Product {
+    id: number;
+    name: string;
+    price : number;
+    stockCode: string;
+    manufacturer: string;
+    description: string;
+    productImages: productImage[];
+    path: string;
     
 }
 
 export class listProductResponse{
 
-    books: List_Product[];
+    books: Product[];
+    totalProductCount: number;
+    
+}
 
+export class ProductResponse{
+
+    book : Product;
+    message: string;
+    success: string;
 }

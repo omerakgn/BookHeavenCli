@@ -25,6 +25,10 @@ export function app(): express.Express {
     index: 'index.html',
   }));
 
+  server.get('*', (req, res) => {
+    res.setTimeout(60000); // Timeout süresi 60 saniyeye çıkarıldı
+    app();
+  });
   // All regular routes use the Angular engine
   server.get('**', (req, res, next) => {
     const { protocol, originalUrl, baseUrl, headers } = req;

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, PLATFORM_ID } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +15,7 @@ import { FileUploadComponent } from './services/common/file-upload/file-upload.c
 import { HomeModule } from './ui/components/home/home.module';
 import { JwtModule } from '@auth0/angular-jwt'
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
+import { isPlatformBrowser } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,14 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     HomeModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => localStorage.getItem("accessToken"),
+
+        tokenGetter: () => {
+        
+          if (isPlatformBrowser(PLATFORM_ID)) {
+            return localStorage.getItem("accessToken");
+          }
+          return null; 
+        },
         allowedDomains: ["localhost:7250"],
       }
     })

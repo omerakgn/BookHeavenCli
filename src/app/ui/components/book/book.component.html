@@ -1,0 +1,59 @@
+<div  *ngIf="products"  class="d-flex justify-content-between" style="margin-top: 30px;">
+
+    <div > 
+        <img  width="300" height="400" *ngIf="products.productImages?.length" src="{{baseUrl.baseUrl}}/{{products.path}}" >
+    </div>
+   
+
+    <div style="margin-left: 50px;">
+       <h4  class="text-center font-weight-bold text-uppercase" >{{products.name}} </h4> <br> 
+      <h6> Aldığım fiyat:  {{products.price}} ₺ </h6> 
+       <div style="margin-top:40px"> {{products.description}}</div>
+    </div>
+
+
+
+</div>
+
+<div>
+    <div class="t-comments-box" style="margin-top:200px ;">
+        <div class="comment-title">
+          Siz Ne Düşünüyorsunuz ?
+        </div>
+        <div class="add-comment">
+          <img src="../../../../assets/profile.png" alt="" />
+          <div class="comment-input">
+            <input
+              class="form-control form-control-sm"
+              type="text"
+              placeholder="Yorum Yap"
+            />
+            <div class="comment-send"><i class="fab fa-telegram-plane"></i></div>
+          </div>
+        </div>
+        <div class="comment comment-level-1" >
+          <img src="" alt="" />
+          <div>
+            <div class="comment-label">
+              <span class="comment-name" >UserName</span>
+              <span class="comment-time"> - 5 days ago</span>
+            </div>
+            <div class="comment-content">
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.
+            </div>
+            <div class="comment-action">
+              <span> <i class="far fa-heart"></i> Like (0)</span>
+              <span> <i class="far fa-comment-alt"></i> Comment (0)</span>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+      
+
+</div>
+
+
+
+<app-footer></app-footer>

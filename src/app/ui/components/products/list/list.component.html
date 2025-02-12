@@ -1,0 +1,14 @@
+<div class="row" style="margin-top: 20px;">
+    
+<div class="card" style="width: 15rem;float:left;margin:5px;margin-top: 10px;" *ngFor="let product of products">
+    <img class="card-img-top" *ngIf="!product.productImages.length"  src="../../../../../assets/book.png">
+    <img width="170" height="220" *ngIf="product.productImages.length" src="{{baseUrl.baseUrl}}/{{product.path}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">Aldığım fiyat: {{product.price}}₺</p>
+      <a (click)="sendProduct(product.id)"   class="btn btn-success">Ürünü İncele</a>
+    </div>
+  </div>
+    
+  
+</div>
