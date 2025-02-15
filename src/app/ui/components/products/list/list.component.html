@@ -3,10 +3,10 @@
 <div class="card" style="width: 15rem;float:left;margin:5px;margin-top: 10px;" *ngFor="let product of products">
     <img class="card-img-top" *ngIf="!product.productImages.length"  src="../../../../../assets/book.png">
     <img width="170" height="220" *ngIf="product.productImages.length" src="{{baseUrl.baseUrl}}/{{product.path}}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title">{{product.name}}</h5>
+    <div class="card-body d-flex flex-column">
+      <h6 class="card-title">{{product.name}}</h6>
       <p class="card-text">Aldığım fiyat: {{product.price}}₺</p>
-      <a (click)="sendProduct(product.id)"   class="btn btn-success">Ürünü İncele</a>
+      <a (click)="sendProduct(product.id)"   class="btn btn-success mt-auto">Ürünü İncele</a>
     </div>
   </div>
     

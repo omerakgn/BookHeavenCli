@@ -17,15 +17,15 @@ import { BookModule } from './book/book.module';
   ],
   imports: [
     CommonModule,
-    ProductsModule,
     HomeModule,
     RegisterModule,
     LoginModule,
     LayoutUIModule,
-    BookModule
+    BookModule,
+    
   ],
   exports:[
-    LayoutUIModule
+    LayoutUIModule,
   ]
 })
 export class ComponentsModule { }

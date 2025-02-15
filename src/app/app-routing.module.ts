@@ -10,8 +10,10 @@ const routes: Routes = [
     path: "admin", component:LayoutComponent,children: [
     {path: "products", loadChildren: () => import("./admin/components/products/products.module").then
       (module => module.ProductsModule),canActivate: [authGuard]},  
-    {path: "orders", loadChildren: () => import("./admin/components/orders/orders.module").then
+    {path: "orders", loadChildren: () => import("./admin/components/orders/orders.module").then  
       (module => module.OrdersModule),canActivate: [authGuard]},   
+      {path: "create", loadChildren: () => import("./admin/components/create/create.module").then
+        (module => module.CreateModule),canActivate: [authGuard]},  
   ], canActivate: [authGuard]
 },
   {path: "", component: HomeComponent },

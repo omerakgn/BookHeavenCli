@@ -1,0 +1,35 @@
+<div class="comment-section" >
+  <h3 style="text-align: center;">Siz Ne Düşünüyorsunuz?</h3>
+
+  <!-- Yorum Ekleme Formu -->
+  <div class="comment-form" *ngIf="isAuthenticated()">
+    <p><strong>{{ getUserName }}</strong></p>
+    <textarea [(ngModel)]="content" placeholder="Düşüncelerinizi paylaşın"></textarea>
+    <button (click)="addComment()" [disabled]="!content">Yorum Ekle</button>
+  </div>
+
+
+<div class="warning-message" *ngIf="!isAuthenticated()">
+  <p>Yorum yapabilmek için giriş yapmalısınız. Giriş yapmak için <a href="#" (click)="navigateToLogin($event)">tıklayınız.</a></p>
+</div>
+
+  
+  <!-- Yorum Listesi -->
+  <div class="comment-list">
+    <div *ngFor="let comment of comments" class="comment-item">
+      <p><strong>{{ comment.userName }}</strong> - <span>{{ comment.createDate | date:'short' }}</span></p>
+      <p>{{ comment.content }}</p>
+      <button *ngIf="isAdmin() || getUserName === comment.userName" (click)="editComment(comment)">Düzenle</button>
+      <button *ngIf="isAdmin()" (click)="deleteComment(comment.id)">Sil</button>
+    </div>
+  </div>
+
+  <!-- Yorum Güncelleme Formu -->
+  <div *ngIf="selectedComment" class="edit-comment-form">
+    <h3>Yorumu Düzenle</h3>
+    <input type="text" [(ngModel)]="selectedComment.userName" placeholder="Adınız" />
+    <textarea [(ngModel)]="selectedComment.content" placeholder="Yorumunuzu güncelleyin"></textarea>
+    <button (click)="saveUpdatedComment()">Güncelle</button>
+    <button (click)="selectedComment = null">İptal</button>
+  </div>
+</div>

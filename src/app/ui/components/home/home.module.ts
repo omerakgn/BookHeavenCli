@@ -2,15 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
-import { ComponentsModule } from '../components.module';
 import { LayoutUIModule } from '../layout/layoutUI.module';
-
-
 
 @NgModule({
   declarations: [
     HomeComponent,
-    
   ],
   imports: [
     CommonModule,
@@ -18,7 +14,6 @@ import { LayoutUIModule } from '../layout/layoutUI.module';
     RouterModule.forChild([
       {path:"", component: HomeComponent}
     ]),
-    
   ],
   bootstrap: [HomeComponent]
 })

@@ -8,13 +8,6 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           
-          <div class="input-group mx-auto" style="width: 500px;">
-            <input type="text" class="form-control me-2" role="search" aria-label="Search" placeholder="Ara" >
-            <div class="input-group-append">
-              <a ><img src="../assets/find3.jpg" width="30" height="30" /></a>
-              
-            </div>
-          </div>
 
 
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -60,8 +53,10 @@
     </div>
   </nav>
 
-  <router-outlet></router-outlet>
+<div class="content-wrapper">
+    <router-outlet></router-outlet>
+</div>
 
-  <ngx-spinner name="s1" type="ball-spin-clockwise"></ngx-spinner>
-  <ngx-spinner name="s2" type="cube-transition"></ngx-spinner>
+<ngx-spinner name="s1" type="ball-spin-clockwise"></ngx-spinner>
+<ngx-spinner name="s2" type="cube-transition"></ngx-spinner>
   

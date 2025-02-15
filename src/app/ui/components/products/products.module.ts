@@ -5,8 +5,6 @@ import { RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { LayoutUIModule } from '../layout/layoutUI.module';
 
-
-
 @NgModule({
   declarations: [
     ProductsComponent,
@@ -18,6 +16,9 @@ import { LayoutUIModule } from '../layout/layoutUI.module';
     RouterModule.forChild([
       {path:"", component: ProductsComponent}
     ])
+  ],
+  exports: [
+    ProductsComponent
   ]
 })
 export class ProductsModule { }

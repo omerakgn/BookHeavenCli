@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsComponent } from './products.component';
 import { RouterModule } from '@angular/router';
-import { CreateComponent } from './create/create.component';
 import { ListComponent } from './list/list.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -20,7 +19,6 @@ import { FileUploadModule } from '../../../services/common/file-upload/file-uplo
 @NgModule({
   declarations: [
     ProductsComponent,
-    CreateComponent,
     ListComponent,
   ],
   imports: [
@@ -34,7 +32,6 @@ import { FileUploadModule } from '../../../services/common/file-upload/file-uplo
     MatIconModule,
     MatButtonModule,
     MatTableModule,
-    MatPaginator,
     MatPaginatorModule,
     DeleteDirectiveModule,
     MatDialogModule,

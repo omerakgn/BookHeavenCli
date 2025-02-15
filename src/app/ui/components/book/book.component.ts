@@ -10,6 +10,7 @@ import { BaseUrl } from '../../../contracts/base_url';
 import { ActivatedRoute } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../../services/common/auth.service';
+import { CommentService } from '../../../services/common/models/comment.service';
 
 @Component({
   selector: 'app-book',
@@ -25,6 +26,7 @@ export class BookComponent  extends BaseComponent implements OnInit{
       private fileService: FileService,
       private route: ActivatedRoute,
       private authService: AuthService,
+      private commentService: CommentService
     )
       {
   super(spinner);
@@ -77,6 +79,7 @@ export class BookComponent  extends BaseComponent implements OnInit{
   }
   ngOnInit() {
    this.getProduct();
+  
   }
 
 }

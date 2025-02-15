@@ -13,7 +13,7 @@ export class HttpClientService {
     return `${requestParameter.baseUrl ? requestParameter.baseUrl : this.baseUrl}/${requestParameter.controller}${requestParameter.action ? `/${requestParameter.action}` : "" }`;
   }
 
-  get<T>(requestParameter: Partial<RequestParameter>, id?: string, imageId? : string): Observable<T>{
+  get<T>(requestParameter: Partial<RequestParameter>, id?: string): Observable<T>{
     let url: string= "";
 
     if(requestParameter.fullEndPoint){
@@ -22,15 +22,15 @@ export class HttpClientService {
       url =`${this.url(requestParameter)}`;
     }
     else{
-      console.log("clientService id değeri: ", id);
-      url = `${this.url(requestParameter)}/ ${id}`;
+      
+      url = `${this.url(requestParameter)}/${id}`;
 
     }
 
     if (requestParameter.queryString) {
       url += `?${requestParameter.queryString}`;
     }
-    
+    console.log("url : ", url);
     let headers = requestParameter.headers || new HttpHeaders({
       'Authorization' : "Bearer " + localStorage.getItem("accessToken")as string
       
@@ -48,7 +48,7 @@ export class HttpClientService {
     } else {
       url = `${this.url(requestParameter)}`;
     }
-  
+    console.log("url : ", url);
     let headers = requestParameter.headers || new HttpHeaders({
       'Content-Type': 'application/json',
       
@@ -56,17 +56,21 @@ export class HttpClientService {
     headers= headers.set( 'Authorization' , "Bearer " + localStorage.getItem("accessToken")as string);
     
     var data = requestParameter.queryString
+    console.log("body : ", body, typeof body);
    
     return this.httpClient.post<T>(url, body, { headers: headers});
   }
-  put<T>(requestParameter: Partial<RequestParameter>, body: Partial<T>): Observable<T>{
+  put<T>(requestParameter: Partial<RequestParameter>, body: Partial<T>, id?: string): Observable<T>{
 
     let url: string = "";
     if(requestParameter.fullEndPoint){
       url = requestParameter.fullEndPoint;
     }
-    else{
+    if(id==null){
       url = `${this.url(requestParameter)}`;
+    }
+    else{
+      url = `${this.url(requestParameter)}/${id}`;
     }
     let header = new Headers({ 'Authorization': `Bearer ${localStorage.getItem("accessToken")as string}` });
     

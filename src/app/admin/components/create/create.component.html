@@ -1,0 +1,36 @@
+<div class="create-container">
+  <div class="header">
+    <label class="headerlbl">Yeni Ürün Kayıt</label>
+  </div>
+
+  <mat-form-field class="form-label" appearance="fill">
+    <mat-label class="example-label">İsim</mat-label>
+    <input matInput #txtName>
+  </mat-form-field>
+
+  <mat-form-field class="form-label" appearance="fill">
+    <mat-label class="example-label">Fiyat</mat-label>
+    <input matInput #txtPrice type="number" min="0" value="0">
+  </mat-form-field>
+
+  <mat-form-field class="form-label" appearance="fill">
+    <mat-label class="example-label">Stok Kodu</mat-label>
+    <input matInput #txtStockCode>
+  </mat-form-field>
+
+  <mat-form-field class="form-label" appearance="fill">
+    <mat-label class="example-label">Yazar</mat-label>
+    <input matInput #txtManifacturer>
+  </mat-form-field>
+
+  <mat-form-field class="form-label" appearance="fill">
+    <mat-label class="example-label">Açıklama</mat-label>
+    <textarea matInput #txtDescription rows="4"></textarea>
+  </mat-form-field>
+
+  <div class="createbtn">
+    <button class="btn btn-success" (click)="create(txtName,txtDescription,txtPrice,txtStockCode,txtManifacturer)">Yeni Ürün Oluştur</button>
+  </div>
+</div>
+
+
