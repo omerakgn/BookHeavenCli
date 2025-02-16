@@ -37,7 +37,7 @@ export class ListComponent extends BaseComponent implements OnInit {
   baseUrl: BaseUrl;
   
   async getProduct(){
-    
+    this.showSpinner(SpinnerType.BallSpinClockWise);
     this.baseUrl = await this.fileService.getBaseStorageUrl();
     console.log("base Url :" , this.baseUrl);
     this.productService.get(() => {this.hideSpinner(SpinnerType.BallSpinClockWise)}, () => 

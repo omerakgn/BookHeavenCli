@@ -33,14 +33,14 @@ export class CommentService {
     .subscribe(response => {
       console.log("response : ", response);
     });
-    console.log("comment : ", comment);
+    
     if(successCallBack){
       successCallBack();
-      console.log("successCallBack gerçekleşti ");
+    
     }
     else{
      errorCallBack && errorCallBack("Bir hata oluştu sonra tekrar deneyiniz.");
-     console.log("errorCallBack : ", errorCallBack);
+    
     }
   }
 
@@ -67,6 +67,13 @@ export class CommentService {
       controller: "Comment",
       action: "DeleteComment"
     }, commentId)
+
+    if(successCallBack){
+      successCallBack();
+    }
+    else{
+      errorCallBack && errorCallBack("Bir hata oluştu sonra tekrar deneyiniz.");
+    }
      await firstValueFrom(deleteObservable);
   }
 }

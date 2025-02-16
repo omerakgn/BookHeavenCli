@@ -26,8 +26,8 @@
 
   <!-- Yorum Güncelleme Formu -->
   <div *ngIf="selectedComment" class="edit-comment-form">
-    <h3>Yorumu Düzenle</h3>
-    <input type="text" [(ngModel)]="selectedComment.userName" placeholder="Adınız" />
+    <h6>Yorumu Düzenle</h6>
+    <p>Kullanıcı Adı: {{ selectedComment.userName }}</p>
     <textarea [(ngModel)]="selectedComment.content" placeholder="Yorumunuzu güncelleyin"></textarea>
     <button (click)="saveUpdatedComment()">Güncelle</button>
     <button (click)="selectedComment = null">İptal</button>

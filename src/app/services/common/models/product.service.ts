@@ -100,8 +100,25 @@ export class ProductService {
     return response;
             
   }
+ async delete(id: string, successCallBack?: () => void, errorCallBack?: (errorMessage: string) => void){
 
+  const deleteObservable = this.httpClientService.delete({
+    controller: "Book",
+    action: "Delete",
+    queryString: id.toString()
+  }, id)
 
+  if(successCallBack){
+
+    successCallBack();
+  }
+  else{
+    errorCallBack && errorCallBack("Bir hata oluştu sonra tekrar deneyiniz.");
+  }
+
+  await firstValueFrom(deleteObservable);
+ 
+ }
   async deleteImages(id: string ,imageId: any, successCallBack: () => void){
 
     

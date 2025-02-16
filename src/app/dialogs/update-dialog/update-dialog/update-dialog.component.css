@@ -1,6 +1,6 @@
 /* Dialog Title */
 .mat-dialog-title {
-    color: #dc3545;
+    color: #218838;
     font-family: 'Poppins', sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
@@ -60,7 +60,7 @@
 
 /* Confirm Button */
 .mat-button:last-child {
-    background-color: #dc3545;
+    background-color: #218838;
     color: white;
     border: none;
 }

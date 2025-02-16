@@ -1,9 +1,78 @@
-.register-container{
-    width: 350px;
-    height: 370px;
-    margin-left: 38%;
-    margin-top: 2%;
-  
+.register-container {
+    width: 33%;
+    min-height: calc(100vh - 300px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem;
+    margin: 10px auto 0;
+    background-color: var(--background-light);
+}
+
+.register-card {
+    width: 100%;
+    max-width: 300px;
+    background: var(--background-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    transition: transform 0.3s ease;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.form-group.col-md-10 {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.form-group.col-md-10 label {
+    position: relative;
+    left: auto;
+    top: auto;
+    align-self: flex-start;
+    margin-left: 10%;
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+    padding: 0;
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.form-group.col-md-10 input {
+    width: 80%;
+}
+
+.form-group.col-md-10 input, 
+.form-group.col-md-10 select {
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-group.col-md-10 input:focus {
+    border-color: #218838;
+    box-shadow: 0 0 0 3px rgba(33, 136, 56, 0.1);
+    background-color: white;
+}
+
+.form-check {
+    width: 80%;
+    margin: 0 auto;
 }
 
 .form-check-label{
@@ -11,8 +80,28 @@
     font-size:small;
     font-weight: lighter;
 }
+
 .text-center{
-   
     font-style: normal;
-    
+}
+
+.row {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.row label {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-success {
+    width: 80%;
+    margin: 1.5rem auto;
+    display: block;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background-color: #218838;
+    border: none;
+    transition: all 0.3s ease;
 }

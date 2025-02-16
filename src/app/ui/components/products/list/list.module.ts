@@ -11,12 +11,16 @@ import { ListComponent } from './list.component';
   declarations: [
     ListComponent
   ],
+ 
   imports: [
     CommonModule,
     RouterModule.forChild([
           {path:"", component: ListComponent}
         ]),
         LayoutUIModule
-      ]
+      ],
+      exports: [
+        ListComponent
+      ],
 })
-export class BookModule { }
+export class ListModule { }

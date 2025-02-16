@@ -53,7 +53,7 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
  
 
 async deleteImage(imageId: any, event: any){
-  console.log("image ID select product  "+ imageId);
+
   this.dialogService.openDialog({
     componentType: DeleteDialogComponent,
     data: DeleteState.Yes,

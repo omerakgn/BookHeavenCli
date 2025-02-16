@@ -4,18 +4,20 @@ import { ProductsComponent } from './products.component';
 import { RouterModule } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { LayoutUIModule } from '../layout/layoutUI.module';
+import { ListModule } from './list/list.module';
 
 @NgModule({
   declarations: [
     ProductsComponent,
-    ListComponent,
+    
   ],
   imports: [
     CommonModule,
     LayoutUIModule,
     RouterModule.forChild([
       {path:"", component: ProductsComponent}
-    ])
+    ]),
+    ListModule
   ],
   exports: [
     ProductsComponent

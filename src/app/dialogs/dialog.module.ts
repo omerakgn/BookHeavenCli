@@ -6,12 +6,14 @@ import { MatButton, MatButtonModule } from '@angular/material/button';
 import { SelectProductImageDialogComponent } from './select-product-image-dialog/select-product-image-dialog.component';
 import { FileUploadModule } from "../services/common/file-upload/file-upload.module";
 import {MatCard, MatCardModule} from '@angular/material/card';
+import { UpdateDialogComponent } from './update-dialog/update-dialog/update-dialog.component';
 
 
 @NgModule({
   declarations: [
     DeleteDialogComponent,
     SelectProductImageDialogComponent,
+    UpdateDialogComponent,
   ],
   imports: [
     CommonModule,

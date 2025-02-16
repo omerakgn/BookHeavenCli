@@ -3,7 +3,13 @@ import { CommentService } from '../../../../../services/common/models/comment.se
 import { Comment, Create_Comment } from '../../../../../contracts/comment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../../../services/common/auth.service';
-
+import { DeleteState } from '../../../../../dialogs/delete-dialog/delete-dialog.component';
+import { DialogService } from '../../../../../services/dialog.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { ProductService } from '../../../../../services/common/models/product.service';
+import { DeleteDialogComponent } from '../../../../../dialogs/delete-dialog/delete-dialog.component';
+import { SpinnerType } from '../../../../../base/base.component';
+import { UpdateDialogComponent, AcceptState } from '../../../../../dialogs/update-dialog/update-dialog/update-dialog.component';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -15,7 +21,10 @@ export class CommentComponent implements OnInit {
   constructor(private commentService: CommentService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private dialogService: DialogService,
+    private spinner: NgxSpinnerService,
+    private productService: ProductService
   ) {}
 
   currentRoute: string;
@@ -58,9 +67,8 @@ export class CommentComponent implements OnInit {
   }
 
   // Yeni yorum ekleme
-  addComment(): void {
+  async addComment() {
 
-   
       const bookid = this.route.snapshot.paramMap.get("id") || "" ;
 
       const newComment: Create_Comment = {
@@ -69,20 +77,33 @@ export class CommentComponent implements OnInit {
       BookId: parseInt(bookid)
     };
 
-      this.commentService.create(newComment, () => {
-      this.loadComments();
-      this.userName = '';
-      this.content = '';
-    }, errorMessage => {
+      await this.commentService.create(newComment, () => {
+        this.ngOnInit();
+        this.userName = '';
+        this.content = '';
+      }, errorMessage => {
       console.error('Yorum eklenirken hata oluştu:', errorMessage);
     });
+   
     
   
   }
 
   // Yorum silme
   deleteComment(commentId: number): void {
-    this.commentService.delete(commentId.toString())
+    this.dialogService.openDialog({
+      componentType: DeleteDialogComponent,
+      data: DeleteState.Yes,
+      afterClosed: async () => {     
+        this.spinner.show(SpinnerType.CubeTransition);
+       await this.commentService.delete(commentId.toString(),()=> {
+        this.spinner.hide(SpinnerType.CubeTransition);
+       });
+       this.ngOnInit();
+      }
+     
+    })
+    
     this.loadComments()
   }
 
@@ -94,12 +115,25 @@ export class CommentComponent implements OnInit {
   // Güncellenmiş yorumu kaydetme
   saveUpdatedComment(): void {
     if (this.selectedComment) {
-      this.commentService.update(this.selectedComment.id.toString(), this.selectedComment, () => {
-      }, errorMessage => {
-        console.error('Yorum güncellenirken hata oluştu:', errorMessage);
-      });
-      this.loadComments();
-      this.selectedComment = null;
+      const id = this.selectedComment.id;
+      const content = this.selectedComment.content;
+      this.dialogService.openDialog({
+        componentType: UpdateDialogComponent,
+        data: AcceptState.Yes,
+        afterClosed: async () => {     
+          this.spinner.show(SpinnerType.CubeTransition);
+          this.commentService.update(id.toString(), { content }, () => {
+            this.spinner.hide(SpinnerType.CubeTransition);
+          }, errorMessage => {
+            console.error('Yorum güncellenirken hata oluştu:', errorMessage);
+          });
+         this.ngOnInit();
+         this.selectedComment = null;
+        }
+       
+      })
+      
+      
     }
   }
 

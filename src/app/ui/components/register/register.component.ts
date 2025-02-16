@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckboxControlValueAccessor, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../../entities/user';
+import { User } from '../../../contracts/users/user';
 import { UserService } from '../../../services/common/models/user.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../../services/ui/custom-toastr.service';
 import { Create_User } from '../../../contracts/users/create_user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,12 @@ import { Create_User } from '../../../contracts/users/create_user';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
-constructor(private formBuilder: FormBuilder , private userService: UserService, private toastrService: CustomToastrService){}
+constructor(
+  private formBuilder: FormBuilder ,
+  private userService: UserService,
+  private toastrService: CustomToastrService,
+  private router: Router
+  ){}
  
 
 form: FormGroup;
@@ -46,25 +52,28 @@ get component(){
 
 submitted: boolean = false;
 
-  async onSubmit(user: User){
-this.submitted = true;
 
-if(this.form.invalid){
+async onSubmit(user: User){
+  this.submitted = true;
+
+  if(this.form.invalid){
   return;
-}
+  }
 
-
-const result: Create_User = await this.userService.create(user);
-if (result.success)
-  this.toastrService.message(result.message, "Kullanıcı Kaydı Başarılı", {
-    messageType: ToastrMessageType.Success,
-    position: ToastrPosition.TopRight
-  })
-else
-  this.toastrService.message(result.message, "Hata", {
-    messageType: ToastrMessageType.Error,
-    position: ToastrPosition.TopRight
-  })
+  const result: Create_User = await this.userService.create(user);
+    if (result.success){
+      this.toastrService.message(result.message, "Kullanıcı Kaydı Başarılı", {
+        messageType: ToastrMessageType.Success,
+        position: ToastrPosition.TopRight
+      });
+    this.router.navigate(["/login"]);
+  }
+    else{
+      this.toastrService.message(result.message, "Hata", {
+        messageType: ToastrMessageType.Error,
+        position: ToastrPosition.TopRight
+      })
+    }
 
 }
 }
